@@ -1,0 +1,1 @@
+# Core Brick for Compass Test Automation
