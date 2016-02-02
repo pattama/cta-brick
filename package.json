@@ -12,9 +12,7 @@
   },
   "dependencies": {
     "co": "~4.0.0",
-    "es6-promisify": "^3.0.0",
-    "request": "~2.67.0",
-    "tree-kill": "1.0.0"
+    "es6-promisify": "^3.0.0"
   },
   "directories": {
     "test": "test"
