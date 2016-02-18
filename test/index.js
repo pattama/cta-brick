@@ -13,7 +13,7 @@ let brick;
 const DEFAULTS = {
 };
 before(function() {
-  brick = new Brick(DEFAULTS);
+  brick = new Brick({}, DEFAULTS);
 });
 
 describe('Module loading', function() {
