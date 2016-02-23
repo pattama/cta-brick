@@ -24,13 +24,13 @@ describe('Module loading', function() {
 });
 
 describe('Brick - validate job', function() {
-  context('when missing/incorrect \'id\' string property in job', function() {
-    it('should throw an error', function() {
-      const job = {};
-      const validatePromise = brick.validate(job);
-      return expect(validatePromise).to.eventually.be.rejectedWith(Error, 'missing/incorrect \'id\' string property in job');
-    });
-  });
+  //context('when missing/incorrect \'id\' string property in job', function() {
+  //  it('should throw an error', function() {
+  //    const job = {};
+  //    const validatePromise = brick.validate(job);
+  //    return expect(validatePromise).to.eventually.be.rejectedWith(Error, 'missing/incorrect \'id\' string property in job');
+  //  });
+  //});
 
   context('when missing/incorrect \'nature\' object property in job', function() {
     it('should throw an error', function() {
