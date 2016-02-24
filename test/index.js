@@ -11,15 +11,40 @@ const Brick = require('../lib/');
 
 let brick;
 const DEFAULTS = {
+  name: 'brick',
+  properties: {},
 };
 before(function() {
   brick = new Brick({}, DEFAULTS);
 });
 
 describe('Module loading', function() {
-  it('should return new Brick object', function(done) {
-    expect(brick).to.be.an.instanceof(Brick);
-    done();
+  context('when missing/incorrect name string property in config', function() {
+    it('should throw an error', function() {
+      return expect(function() {
+        return new Brick({}, {
+          name: {},
+        });
+      }).to.throw(Error, `missing/incorrect 'name' string property in config`);
+    });
+  });
+
+  context('when missing/incorrect properties object property in config', function() {
+    it('should throw an error', function() {
+      return expect(function() {
+        return new Brick({}, {
+          name: 'brick',
+          properties: '',
+        });
+      }).to.throw(Error, `incorrect 'properties' object property in config`);
+    });
+  });
+
+  context('when valid', function() {
+    it('should return new Brick object', function(done) {
+      expect(brick).to.be.an.instanceof(Brick);
+      done();
+    });
   });
 });
 
