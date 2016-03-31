@@ -48,6 +48,20 @@ describe('Module loading', function() {
   });
 });
 
+describe('Brick - events', function() {
+  it('should emit "initialized" event', function(done) {
+    const b = new Brick({}, DEFAULTS);
+    b.on('initialized', done);
+  });
+});
+
+describe('Brick - start', function() {
+  it('should have start method', function() {
+    const b = new Brick({}, DEFAULTS);
+    b.start();
+  });
+});
+
 describe('Brick - validate job', function() {
   //context('when missing/incorrect \'id\' string property in job', function() {
   //  it('should throw an error', function() {
