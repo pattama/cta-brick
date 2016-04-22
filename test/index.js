@@ -51,6 +51,7 @@ describe('Module loading', function() {
 describe('Brick - events', function() {
   it('should emit "initialized" event', function(done) {
     const b = new Brick({}, DEFAULTS);
+    b.init();
     b.on('initialized', done);
   });
 });
