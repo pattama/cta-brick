@@ -6,6 +6,8 @@ const chai = require('chai');
 const chaiAsPromised = require('chai-as-promised');
 chai.use(chaiAsPromised);
 const expect = chai.expect;
+const sinon = require('sinon');
+require('sinon-as-promised');
 
 const Brick = require('../lib/');
 
@@ -48,10 +50,23 @@ describe('Module loading', function() {
   });
 });
 
-describe('Brick - events', function() {
-  it('should emit "initialized" event', function(done) {
-    const b = new Brick({}, DEFAULTS);
-    b.on('initialized', done);
+describe('Brick - init', function() {
+  const b = new Brick({}, DEFAULTS);
+  const spyEmit = sinon.spy(b, 'emit');
+
+  before(function() {
+    b.init();
+  });
+
+  it('should emit "initialized" event after 100ms', function(done) {
+    setTimeout(() => {
+      expect(spyEmit.calledWithExactly('initialized')).to.equal(true);
+      done();
+    }, 100);
+  });
+
+  after(function() {
+    b.emit.restore();
   });
 });
 
@@ -63,13 +78,13 @@ describe('Brick - start', function() {
 });
 
 describe('Brick - validate job', function() {
-  //context('when missing/incorrect \'id\' string property in job', function() {
+  // context('when missing/incorrect \'id\' string property in job', function() {
   //  it('should throw an error', function() {
   //    const job = {};
   //    const validatePromise = brick.validate(job);
   //    return expect(validatePromise).to.eventually.be.rejectedWith(Error, 'missing/incorrect \'id\' string property in job');
   //  });
-  //});
+  // });
 
   context('when missing/incorrect \'nature\' object property in job', function() {
     it('should throw an error', function() {
