@@ -78,20 +78,13 @@ describe('Brick - start', function() {
 });
 
 describe('Brick - validate job', function() {
-  //context('when missing/incorrect \'id\' string property in job', function() {
-  //  it('should throw an error', function() {
-  //    const job = {};
-  //    const validatePromise = brick.validate(job);
-  //    return expect(validatePromise).to.eventually.be.rejectedWith(Error, 'missing/incorrect \'id\' string property in job');
-  //  });
-  //});
-
   context('when missing/incorrect \'nature\' object property in job', function() {
     it('should throw an error', function() {
       const job = {
         id: '001',
       };
-      const validatePromise = brick.validate(job);
+      const context = { data: job };
+      const validatePromise = brick.validate(context);
       return expect(validatePromise).to.eventually.be.rejectedWith(Error, 'missing/incorrect \'nature\' object property in job');
     });
   });
@@ -104,7 +97,8 @@ describe('Brick - validate job', function() {
           type: 'bar',
         },
       };
-      const validatePromise = brick.validate(job);
+      const context = { data: job };
+      const validatePromise = brick.validate(context);
       return expect(validatePromise).to.eventually.be.rejectedWith(Error, 'missing/incorrect \'quality\' string property in job nature');
     });
   });
@@ -117,7 +111,8 @@ describe('Brick - validate job', function() {
           quality: 'Execution',
         },
       };
-      const validatePromise = brick.validate(job);
+      const context = { data: job };
+      const validatePromise = brick.validate(context);
       return expect(validatePromise).to.eventually.be.rejectedWith(Error, 'missing/incorrect \'type\' string property in job nature');
     });
   });
@@ -131,7 +126,8 @@ describe('Brick - validate job', function() {
           type: 'CommandLine',
         },
       };
-      const validatePromise = brick.validate(job);
+      const context = { data: job };
+      const validatePromise = brick.validate(context);
       return expect(validatePromise).to.eventually.be.rejectedWith(Error, 'missing/incorrect \'payload\' object property in job');
     });
   });
@@ -146,7 +142,8 @@ describe('Brick - validate job', function() {
         },
         payload: {},
       };
-      const validatePromise = brick.validate(job);
+      const context = { data: job };
+      const validatePromise = brick.validate(context);
       expect(validatePromise).to.eventually.be.an('object')
         .and.to.have.property('ok', 1);
       done();
@@ -154,8 +151,9 @@ describe('Brick - validate job', function() {
   });
 });
 
-describe('Brick - do job', function() {
-  it('should fulfill promise', function() {
+describe('Brick - process context', function() {
+  let context;
+  before(function() {
     const job = {
       id: '001',
       nature: {
@@ -164,6 +162,26 @@ describe('Brick - do job', function() {
       },
       payload: {},
     };
-    return expect(brick.doJob(job)).to.be.fulfilled;
+    context = {
+      data: job,
+      emit: function(event, brickName, response) {
+        console.log('mock emit', event, brickName, response);
+      },
+    };
+    sinon.spy(brick.logger, 'info');
+    sinon.spy(context, 'emit');
+    brick.process(context);
+  });
+
+  it('should log info message', function() {
+    return expect(brick.logger.info.calledWith('job', context.data)).to.be.equal(true);
+  });
+
+  it('should emit done event on context', function() {
+    return expect(context.emit.calledWith('done', brick.name, 'ok')).to.be.equal(true);
+  });
+
+  it('should return context', function() {
+    return expect(brick.process(context)).to.be.equal(context);
   });
 });
