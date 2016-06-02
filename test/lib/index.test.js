@@ -1,6 +1,3 @@
-/**
- * Created by U6020429 on 08/01/2016.
- */
 'use strict';
 const chai = require('chai');
 const chaiAsPromised = require('chai-as-promised');
@@ -9,7 +6,7 @@ const expect = chai.expect;
 const sinon = require('sinon');
 require('sinon-as-promised');
 
-const Brick = require('../lib/');
+const Brick = require('../../lib/');
 
 let brick;
 const DEFAULTS = {
