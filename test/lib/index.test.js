@@ -3,6 +3,7 @@ const chai = require('chai');
 const chaiAsPromised = require('chai-as-promised');
 chai.use(chaiAsPromised);
 const expect = chai.expect;
+const assert = chai.assert;
 const sinon = require('sinon');
 require('sinon-as-promised');
 
@@ -48,29 +49,27 @@ describe('Module loading', function() {
 });
 
 describe('Brick - init', function() {
-  const b = new Brick({}, DEFAULTS);
-  const spyEmit = sinon.spy(b, 'emit');
-
-  before(function() {
-    b.init();
-  });
-
-  it('should emit "initialized" event after 100ms', function(done) {
-    setTimeout(() => {
-      expect(spyEmit.calledWithExactly('initialized')).to.equal(true);
+  it('should have "init" method', function(done) {
+    const b = new Brick({}, DEFAULTS);
+    b.init()
+    .then(() => {
       done();
-    }, 100);
-  });
-
-  after(function() {
-    b.emit.restore();
+    })
+    .catch((e) => {
+      assert.fail(e, null, 'should not throw an error on init method');
+      done();
+    });
   });
 });
 
 describe('Brick - start', function() {
   it('should have start method', function() {
     const b = new Brick({}, DEFAULTS);
-    b.start();
+    try {
+      b.start();
+    } catch (e) {
+      assert.fail(e, null, 'should not throw an error on start method');
+    }
   });
 });
 
