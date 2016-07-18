@@ -51,7 +51,7 @@ describe('Module loading', function() {
 describe('Brick - init', function() {
   it('should have "init" method', function(done) {
     const b = new Brick({}, DEFAULTS);
-    b.init()
+    Promise.all([b.init()])
     .then(() => {
       done();
     })
@@ -160,12 +160,12 @@ describe('Brick - process context', function() {
     };
     context = {
       data: job,
-      emit: function(event, brickName, response) {
+      send: function(event, brickName, response) {
         console.log('mock emit', event, brickName, response);
       },
     };
     sinon.spy(brick.logger, 'info');
-    sinon.spy(context, 'emit');
+    sinon.spy(context, 'send');
     brick.process(context);
   });
 
@@ -174,7 +174,7 @@ describe('Brick - process context', function() {
   });
 
   it('should emit done event on context', function() {
-    return expect(context.emit.calledWith('done', brick.name, 'ok')).to.be.equal(true);
+    return expect(context.send.calledWith('done', 'ok')).to.be.equal(true);
   });
 
   it('should return context', function() {
