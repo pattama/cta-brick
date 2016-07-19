@@ -181,3 +181,12 @@ describe('Brick - process context', function() {
     return expect(brick.process(context)).to.be.equal(context);
   });
 });
+
+describe('Brick - health', function() {
+  it('should return a status', function() {
+    const health = brick.health();
+    assert.property(health, 'status');
+    assert.property(health, 'reason');
+    assert.property(health, 'services');
+  });
+});
