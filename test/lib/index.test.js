@@ -160,8 +160,8 @@ describe('Brick - process context', function() {
     };
     context = {
       data: job,
-      send: function(event, brickName, response) {
-        console.log('mock emit', event, brickName, response);
+      send: function(event, response) {
+        console.log('mock send', event, response);
       },
     };
     sinon.spy(brick.logger, 'info');
