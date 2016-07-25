@@ -182,11 +182,13 @@ describe('Brick - process context', function() {
   });
 });
 
-describe('Brick - health', function() {
-  it('should return a status', function() {
-    const health = brick.health();
-    assert.property(health, 'status');
-    assert.property(health, 'reason');
-    assert.property(health, 'services');
+describe('Brick - healthCheck', function() {
+  it('should have healthCheck dependency', function() {
+    assert.property(brick, 'healthCheck');
+  });
+  it('should update a healthCheck', function() {
+    const spy = sinon.spy(brick.healthCheck, 'update');
+    brick.health();
+    sinon.assert.called(spy);
   });
 });
