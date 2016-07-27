@@ -181,3 +181,21 @@ describe('Brick - process context', function() {
     return expect(brick.process(context)).to.be.equal(context);
   });
 });
+
+describe('Brick - healthCheck', function() {
+  const healthCheck = {
+    update: () => {},
+  };
+  const cementHelper = {
+    dependencies: {healthCheck: healthCheck},
+  };
+  const brick2 = new Brick(cementHelper, DEFAULTS);
+  it('should have healthCheck dependency', function() {
+    assert.property(brick2.dependencies, 'healthCheck');
+  });
+  it('should update a healthCheck', function() {
+    const spy = sinon.spy(brick2.dependencies.healthCheck, 'update');
+    brick2.health();
+    sinon.assert.called(spy);
+  });
+});
