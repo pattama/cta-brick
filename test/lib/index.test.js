@@ -182,6 +182,24 @@ describe('Brick - process context', function() {
   });
 });
 
+describe('Brick - logger dependency', function() {
+  const Logger = require('cta-logger');
+  const logger = new Logger({
+    file: false,
+  });
+  const spy = sinon.spy(logger, 'author');
+  const cementHelper = {
+    dependencies: {logger: logger},
+  };
+  const brick2 = new Brick(cementHelper, {
+    name: 'brick2',
+    properties: {},
+  });
+  it('should call logger author method', function() {
+    sinon.assert.called(spy);
+  });
+});
+
 describe('Brick - healthCheck', function() {
   const healthCheck = {
     update: () => {},
