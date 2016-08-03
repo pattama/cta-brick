@@ -38,7 +38,7 @@ describe('Brick - constructor', function() {
   context(`when incorrect 'cementHelper' argument`, function() {
     it('should throw an Error', function() {
       return expect(function() {
-        return new Brick([], DEFAULTCONFIG);
+        return new Brick('not-a-cementhelper', DEFAULTCONFIG);
       }).to.throw(Error, `missing/incorrect 'cementHelper' CementHelper argument`);
     });
   });
