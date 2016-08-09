@@ -3,6 +3,7 @@ const chai = require('chai');
 const chaiAsPromised = require('chai-as-promised');
 chai.use(chaiAsPromised);
 const expect = chai.expect;
+const assert = chai.assert;
 const sinon = require('sinon');
 require('sinon-as-promised');
 const requireSubvert = require('require-subvert')(__dirname);
@@ -125,8 +126,18 @@ describe('Brick - constructor', function() {
 
       it('should create a new Logger and set it as Brick.logger property', function() {
         sinon.assert.called(stubLogger);
-        expect(brick).to.have.property('logger', stubLogger.returnValues[0]);
+        //expect(brick).to.have.property('logger', stubLogger.returnValues[0]);
+        assert.property(brick, 'logger');
       });
+    });
+    it('instantiate with no dependencies', () => {
+      const b = new Brick({
+        constructor: {
+          name: 'CementHelper',
+        },
+        brickName: 'brick',
+      }, DEFAULTCONFIG);
+      assert.property(b, 'logger');
     });
   });
 });
