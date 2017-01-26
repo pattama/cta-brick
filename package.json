@@ -11,6 +11,7 @@
     "node": "4.2.2"
   },
   "dependencies": {
+    "cta-logger": "git+ssh://git@git.sami.int.thomsonreuters.com:compass/cta-logger.git",
     "co": "~4.0.0",
     "es6-promisify": "^3.0.0"
   },
