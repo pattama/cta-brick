@@ -39,8 +39,8 @@ describe('Brick - process context', function() {
     };
     context = {
       data: job,
-      emit: function(event, brickName, response) {
-        console.log('mock emit', event, brickName, response);
+      emit: function() {
+        //console.log('mock emit fn args', arguments);
       },
     };
     sinon.spy(brick.logger, 'info');
