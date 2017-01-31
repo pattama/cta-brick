@@ -28,27 +28,27 @@ const DEFAULTCEMENTHELPER = {
 };
 
 describe('Brick - constructor', function() {
-  context(`when missing 'cementHelper' argument`, function() {
+  context('when missing \'cementHelper\' argument', function() {
     it('should throw an Error', function() {
       return expect(function() {
         return new Brick(null, DEFAULTCONFIG);
-      }).to.throw(Error, `missing/incorrect 'cementHelper' CementHelper argument`);
+      }).to.throw(Error, 'missing/incorrect \'cementHelper\' CementHelper argument');
     });
   });
 
-  context(`when incorrect 'cementHelper' argument`, function() {
+  context('when incorrect \'cementHelper\' argument', function() {
     it('should throw an Error', function() {
       return expect(function() {
         return new Brick('not-a-cementhelper', DEFAULTCONFIG);
-      }).to.throw(Error, `missing/incorrect 'cementHelper' CementHelper argument`);
+      }).to.throw(Error, 'missing/incorrect \'cementHelper\' CementHelper argument');
     });
   });
 
-  context(`when missing/incorrect 'config' argument`, function() {
+  context('when missing/incorrect \'config\' argument', function() {
     it('should throw an Error', function() {
       return expect(function() {
         return new Brick(DEFAULTCEMENTHELPER, null);
-      }).to.throw(Error, `missing/incorrect 'config' object argument`);
+      }).to.throw(Error, 'missing/incorrect \'config\' object argument');
     });
   });
 
@@ -58,7 +58,7 @@ describe('Brick - constructor', function() {
     it('should throw an error', function() {
       return expect(function() {
         return new Brick(DEFAULTCEMENTHELPER, config);
-      }).to.throw(Error, `missing/incorrect 'name' string property in config`);
+      }).to.throw(Error, 'missing/incorrect \'name\' string property in config');
     });
   });
 
@@ -68,7 +68,7 @@ describe('Brick - constructor', function() {
     it('should throw an error', function() {
       return expect(function() {
         return new Brick(DEFAULTCEMENTHELPER, config);
-      }).to.throw(Error, `incorrect 'properties' object property in config`);
+      }).to.throw(Error, 'incorrect \'properties\' object property in config');
     });
   });
 
