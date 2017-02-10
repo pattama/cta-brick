@@ -52,3 +52,42 @@ module.exports = {
 };
 ````
 
+# name
+A unique name that describe your Brick
+ 
+# module
+The path to the Brick source code.
+
+It can be a node module (eg. 'cta-io') or a relative path to `Application Base Directory`
+(eg. './path/to/your/brick' or '../path/to/your/brick')
+
+Application Base Directory is set as a second argument when you instantiate
+[Cement](https://git.sami.int.thomsonreuters.com/compass/cta-flowcontrol).
+````js
+const cement = new Cement(config, applicationBaseDirectory);
+````
+
+# dependencies
+Tools dependencies that would be injected to the Brick by Cement. It should be an object
+where keys are the references that are used inside the Brick source code and values are
+references to Tools names defined in the application configuration.
+
+Example with a full configuration
+````js
+module.exports = {
+  tools: [{
+    name: 'some-tool',
+    ...
+  }],
+  bricks: [{
+    name: 'mybrick',
+    module: './path/to/your/brick',
+    dependencies: {
+      mytool: 'some-tool',      
+    },
+    ...
+  }]
+};
+````
+
+Here you can access the Tool some-tool by its reference `this.dependencies.mytool`
