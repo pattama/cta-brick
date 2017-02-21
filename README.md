@@ -3,51 +3,50 @@ Base Brick for Compass Test Automation
 
 This is the base of Compass Test Automation [Brick Concept](https://git.sami.int.thomsonreuters.com/compass/cta/cement.md#bricks)
 
-It is not intended to be part of a CTA application Bricks.
- 
-Bricks should first extend this base Brick and then set their properties and methods. See [cta-brick-boilerplate](https://git.sami.int.thomsonreuters.com/compass/cta-brick-boilerplate) for usage.
+It is not intended to be part of a CTA application Bricks. Bricks should first extend this base Brick and then set their properties and methods.
+See [cta-brick-boilerplate](https://git.sami.int.thomsonreuters.com/compass/cta-brick-boilerplate) for usage.
 
 # Brick configuration
 
-The most important part of a Brick is its configuration. It mostly looks like below:
+The most important part of a Brick is its configuration. Since Bricks are designed to have some relationships between each other,
+we will illustrate that in a basic application with 2 Bricks. 
 
 ````js
 'use strict';
 
 module.exports = {
-  name: 'mybrick',
-  module: './path/to/your/brick',
-  dependencies: {
-    foo: 'foo',
-    bar: 'bar',
-  },
-  properties: {
-    port: 3000,
-    timeout: 15000,
-    filepath: '/tmp/some-file.txt',
-  },
-  publish: [
+  bricks: [
     {
-      topic: 'some-topic',
-      data: [
+      name: 'publisher',
+      module: './publisher',
+      publish: [
         {
-          nature: {
-            type: 'some-type',
-            quality: 'some-quality',
-          },
+          topic: 'operations.com',
+          data: [
+            {
+              nature: {
+                type: 'operation',
+                quality: 'multiplication',
+              },
+            },
+          ],
         },
       ],
     },
-  ],
-  subscribe: [
     {
-      topic: 'some-other-topic',
-      data: [
+      name: 'consumer',
+      module: './consumer',
+      subscribe: [
         {
-          nature: {
-            type: 'some-other-type',
-            quality: 'some-other-quality',
-          },
+          topic: 'operations.com',
+          data: [
+            {
+              nature: {
+                type: 'operation',
+                quality: 'multiplication',
+              },
+            },
+          ],
         },
       ],
     },
@@ -104,3 +103,47 @@ In this example, inside source code of the brick you can access the Tool some-to
 Brick properties are some optional parameters used by the Brick that control how it behaves (eg. PORT number, timeout value, interval value...etc).
 
 You can access those parameters by their references (eg. `this.properties.port` and `this.properties.filepath`)
+
+## Publish and Subscribe
+
+This is where you define your publishing and subscribing [contracts](https://git.sami.int.thomsonreuters.com/compass/cta/cement.md#contracts)
+
+A contract is composed of a topic, where you publish to or subscribe to, and one or many data natures (type & quality) that describe the data flow.
+
+When a Brick publish with a contract, there should be another brick that subscribe with the same contract.
+
+TODO: sequence diagram
+
+### Publish
+
+In order to publish some data into the flow, you have to use CementHelper for that `this.cementHelper.createContext(data).publish();`
+ 
+The data nature should match the contract you define in the publish configuration.
+ 
+Example with the brick above:
+
+````js
+this.cementHelper.createContext({
+  nature: {
+    type: 'some-type',
+    quality: 'some-quality',
+  },
+  payload: {
+    a: 1,
+    b: 2,
+  },
+}).publish();
+````
+
+### Subscribe
+
+When you define a subscribe field in a Brick configuration, your Brick is already subscribed to consume data that may be published in the flow with the same contract.
+ 
+This is done thanks to Cement. All you have to do in your Brick is to define how would you treat the consumed data. This should be done in [process](#process) method
+
+## Brick methods
+
+### Process
+
+This method is called by Cement whenever a Brick consumes data that have been published by another Brick with the same contract.
+
