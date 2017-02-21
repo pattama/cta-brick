@@ -31,8 +31,7 @@
     "opener": "^1.4.0",
     "require-subvert": "^0.1.0",
     "sinon": "^1.17.0",
-    "sinon-as-promised": "^4.0.0",
-    "cta-flowcontrol": "git+ssh://git@git.sami.int.thomsonreuters.com:compass/cta-flowcontrol.git#1.0.0"
+    "sinon-as-promised": "^4.0.0"
   },
   "scripts": {
     "test": "NODE_PATH=. _mocha",
