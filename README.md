@@ -8,45 +8,43 @@ See [cta-brick-boilerplate](https://git.sami.int.thomsonreuters.com/compass/cta-
 
 # Brick configuration
 
-The most important part of a Brick is its configuration. Since Bricks are designed to have some relationships between each other,
-we will illustrate that in a basic application with 2 Bricks. 
+A full brick configuration looks like below: 
 
 ````js
-'use strict';
-
 module.exports = {
-  bricks: [
+  name: 'mybrick',
+  module: './path/to/module',
+  dependencies: {
+    foo: 'foo',
+    bar: 'bar',
+  },
+  properties: {
+    port: 3000,
+    timeout: 15000,
+    filepath: '/path/to/file',
+  },
+  publish: [
     {
-      name: 'publisher',
-      module: './publisher',
-      publish: [
+      topic: 'some-topic',
+      data: [
         {
-          topic: 'operations.com',
-          data: [
-            {
-              nature: {
-                type: 'operation',
-                quality: 'multiplication',
-              },
-            },
-          ],
+          nature: {
+            type: 'some-type',
+            quality: 'some-quality',
+          },
         },
       ],
     },
+  ],
+  subscribe: [
     {
-      name: 'consumer',
-      module: './consumer',
-      subscribe: [
+      topic: 'some-other-topic',
+      data: [
         {
-          topic: 'operations.com',
-          data: [
-            {
-              nature: {
-                type: 'operation',
-                quality: 'multiplication',
-              },
-            },
-          ],
+          nature: {
+            type: 'some-other-type',
+            quality: 'some-other-quality',
+          },
         },
       ],
     },
@@ -78,7 +76,8 @@ It should be an object where:
 - keys are references that would be used inside the Brick source code
 - values are references to Tools names defined in the application full configuration.
 
-Example with a full configuration
+Example with a full application configuration with one brick and one tool:
+
 ````js
 module.exports = {
   tools: [{
