@@ -95,9 +95,9 @@ Here we're going to describe process in **Brick**.
 
 In CTA-OSS, we can informally define two phases for Bricks.
 
-* In **Initial** Phase, Brick's **_init()_** and **_start()_** will be called to initialize and start. 
+* In **Initial** Phase, Brick's **_init()_** and **_start()_** will be called to initialize and start
 
-* In **Process** Phase, after Brick was started, it is ready for process. When there is incoming context, the Brick's **_validate()_** and **_process()_** will be called to process.
+* In **Process** Phase, after Brick was started, it is ready for process. When there is incoming context, the Brick's **_validate()_** and **_process()_** will be called to process some works
 
 [back to top](#guidelines)
 
