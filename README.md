@@ -19,7 +19,7 @@ We aim to give you brief guidelines here.
 
 ### 1. Brick Class Usage
 
-To use it, we need to extend the class.
+To create **a brick** for **CTA-OSS Framework**, we need to extend the class.
 
 ```javascript
 const Brick = require("cta-brick");
