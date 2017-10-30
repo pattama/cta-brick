@@ -41,7 +41,7 @@ This example shows how to use **Brick**. We only implement the important method 
 
 Here is a structure of **Brick** Class.
 
-```typescript
+```javascript
 class Brick {
   constructor(cementHelper, configuration);
 
