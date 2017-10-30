@@ -45,13 +45,13 @@ Here is a structure of **Brick** Class.
 class Brick {
   constructor(cementHelper, configuration);
 
-  init(): Promise<any>;
+  init(): Promise;
 
   start(): void;
 
-  validate(context): Promise<any>;
+  validate(context): Promise;
   
-  process(context): Promise<any>;
+  process(context): Promise;
 
   health(data): void;
 }
