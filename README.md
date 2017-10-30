@@ -6,7 +6,7 @@ Brick Modules for Compass Test Automation, One of Libraries in CTA-OSS Framework
 
 ### Overview
 
-This module provides the **Brick** class to extend. To implement a brick, you need **Brick** class in **cta-brick** to extend _your own brick_, see [Usage](#1-brick-class-usage). In the design, you probably have _many_ **bricks** to _process_ some works. Those bricks, you design, **must** _extends_ from **Brick** class in **cta-brick**. The **Brick** provides some useful methods to implement, see [Structure](#2-brick-class-structure).
+This module provides the **Brick** class to extend. To implement a brick, you need **Brick** class in **cta-brick** to **'extends'** and implement _your own brick_, see [Usage](#1-brick-class-usage). In the design, you probably have _many_ **bricks** to _process_ some works. Those bricks, you design, must **'extends'** from **Brick** class in **cta-brick**. The **Brick** provides some useful methods to implement, see [Structure](#2-brick-class-structure).
 
 ## Guidelines
 
