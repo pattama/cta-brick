@@ -69,6 +69,8 @@ The **Brick** Class has _five_ methods.
 
 * **health()** - to operate dependencies health check
 
+To learn about **_Promise_**, click [here](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise).
+
 [back to top](#guidelines)
 
 ### 3. Brick Class Constructor
