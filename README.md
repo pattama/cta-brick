@@ -1,4 +1,7 @@
-# cta-brick [ ![build status](https://git.sami.int.thomsonreuters.com/compass/cta-brick/badges/master/build.svg)](https://git.sami.int.thomsonreuters.com/compass/cta-brick/commits/master) [![coverage report](https://git.sami.int.thomsonreuters.com/compass/cta-brick/badges/master/coverage.svg)](https://git.sami.int.thomsonreuters.com/compass/cta-brick/commits/master)
+# cta-brick
+[![Build Status](https://travis-ci.org/thomsonreuters/cta-brick.svg?branch=master)](https://travis-ci.org/thomsonreuters/cta-brick)
+[![Coverage Status](https://coveralls.io/repos/github/thomsonreuters/cta-brick/badge.svg?branch=master)](https://coveralls.io/github/thomsonreuters/cta-brick?branch=master)
+[![codecov](https://codecov.io/gh/thomsonreuters/cta-brick/branch/master/graph/badge.svg)](https://codecov.io/gh/thomsonreuters/cta-brick)
 
 Brick Modules for Compass Test Automation, One of Libraries in CTA-OSS Framework
 
